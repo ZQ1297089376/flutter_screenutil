@@ -115,6 +115,14 @@ class ScreenUtil {
             ? Orientation.landscape
             : Orientation.portrait);
 
+    double minWidth = min(designSize.width, designSize.height);
+    double maxWidth = max(designSize.width, designSize.height);
+    if (orientation == Orientation.portrait) {
+      designSize = Size(minWidth, maxWidth);
+    } else {
+      designSize = Size(maxWidth, minWidth);
+    }
+
     _instance
       .._context = scaleByHeight ? null : context
       .._uiSize = designSize
