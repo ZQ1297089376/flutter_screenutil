@@ -14,7 +14,6 @@ class HomePageScaffold extends StatelessWidget {
     print('实际宽度和字体(dp)与设计稿(dp)的比例:${ScreenUtil().scaleWidth}');
     print('实际高度(dp)与设计稿(dp)的比例:${ScreenUtil().scaleHeight}');
     print('高度相对于设计稿放大的比例:${ScreenUtil().scaleHeight}');
-    print('系统的字体缩放比例:${ScreenUtil().textScaleFactor}');
     print('屏幕宽度的0.5:${0.5.sw}dp');
     print('屏幕高度的0.5:${0.5.sh}dp');
     print('屏幕方向:${ScreenUtil().orientation}');
@@ -90,7 +89,6 @@ class HomePageScaffold extends StatelessWidget {
             SizedBox(
               height: 50.h,
             ),
-            Text('系统的字体缩放比例:${ScreenUtil().textScaleFactor}'),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
@@ -100,7 +98,6 @@ class HomePageScaffold extends StatelessWidget {
                     color: Colors.black,
                     fontSize: 16.sp,
                   ),
-                  textScaleFactor: 1.0,
                 ),
                 Text(
                   '我的文字大小在设计稿上是16dp，会随着系统的文字缩放比例变化',

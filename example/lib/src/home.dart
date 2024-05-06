@@ -13,7 +13,6 @@ class HomePageScaffold extends StatelessWidget {
     print('The ratio of actual width to UI design:${ScreenUtil().scaleWidth}');
     print(
         'The ratio of actual height to UI design:${ScreenUtil().scaleHeight}');
-    print('System font scaling:${ScreenUtil().textScaleFactor}');
     print('0.5 times the screen width:${0.5.sw}dp');
     print('0.5 times the screen height:${0.5.sh}dp');
     print('Screen orientation:${ScreenUtil().orientation}');
@@ -162,8 +161,6 @@ class HomePageScaffold extends StatelessWidget {
                   Text(
                       'The ratio of actual height to UI design:${ScreenUtil().scaleHeight}'),
                   10.verticalSpace,
-                  Text(
-                      'System font scaling factor:${ScreenUtil().textScaleFactor}'),
                   5.verticalSpace,
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -174,7 +171,6 @@ class HomePageScaffold extends StatelessWidget {
                           color: Colors.black,
                           fontSize: 16.sp,
                         ),
-                        textScaleFactor: 1.0,
                       ),
                       Text(
                         '16sp,if data is not set in MediaQuery,my font size will change with the system.',

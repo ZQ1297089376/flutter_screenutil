@@ -4,7 +4,7 @@
  */
 
 import 'dart:math' show min, max;
-import 'dart:ui' show FlutterWindow;
+import 'dart:ui' as ui show FlutterView;
 import 'dart:async' show Completer;
 
 import 'package:flutter/widgets.dart';
@@ -55,19 +55,25 @@ class ScreenUtil {
   ///   )
   /// ```
   static Future<void> ensureScreenSize([
-    FlutterWindow? window,
+    ui.FlutterView? window,
     Duration duration = const Duration(milliseconds: 10),
   ]) async {
     final binding = WidgetsFlutterBinding.ensureInitialized();
-    window ??= binding.window;
+    binding.deferFirstFrame();
 
-    if (window.viewConfiguration.geometry.isEmpty) {
-      return Future.delayed(duration, () async {
-        binding.deferFirstFrame();
-        await ensureScreenSize(window, duration);
-        return binding.allowFirstFrame();
-      });
-    }
+    await Future.doWhile(() {
+      if (window == null) {
+        window = binding.platformDispatcher.implicitView;
+      }
+
+      if (window == null || window!.physicalSize.isEmpty) {
+        return Future.delayed(duration, () => true);
+      }
+
+      return false;
+    });
+
+    binding.allowFirstFrame();
   }
 
   Set<Element>? _elementsToRebuild;
@@ -141,11 +147,6 @@ class ScreenUtil {
   ///获取屏幕方向
   ///Get screen orientation
   Orientation get orientation => _orientation;
-
-  /// 每个逻辑像素的字体像素数，字体的缩放比例
-  /// The number of font pixels for each logical pixel.
-  double get textScaleFactor =>
-      _context != null ? MediaQuery.of(_context!).textScaleFactor : 1;
 
   /// 设备的像素密度
   /// The size of the media in logical pixels (e.g, the size of the screen).

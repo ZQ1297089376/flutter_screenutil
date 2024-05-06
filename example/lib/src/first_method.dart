@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
       useInheritedMediaQuery: true,
       builder: (_, child) {
         return MaterialApp(
-          debugShowCheckedModeBanner: false,
+          debugShowCheckedModeBanner: true,
           useInheritedMediaQuery: true,
           title: 'First Method',
           // You can use the library anywhere in the app even in theme
